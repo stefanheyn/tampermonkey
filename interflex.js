@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeiterfassung Interflex Time to stay
 // @namespace    http://tampermonkey.net/
-// @version      0.2.3
+// @version      0.2.4
 // @updateURL    https://raw.githubusercontent.com/stefanheyn/tampermonkey/master/interflex.js
 // @description  try to take over the world!
 // @author       Stefan
@@ -9,9 +9,21 @@
 // @grant        none
 // ==/UserScript==
 
-window.setInterval(function() {
+window.setTimeout(function() {
     'use strict';
     var $ = window.jQuery;
+    var lastMove = (new Date()).getTime();
+    $(document).mousemove(function(e){
+        lastMove = e.timeStamp;
+    })
+
+    window.setInterval(function(){
+        console.log((new Date()).getTime()-lastMove)
+        if((new Date()).getTime()-lastMove > (60 * 1000)){
+            window.location.reload()
+        }
+    },10000)
+
     const [overtimeHours, overtimeMinutesDec] = $('td.iflxHomeInfoAcc:first').text().trim().split(',');
     $('td.iflxHomeInfoAcc:first')
         .append(" (" + overtimeHours + ':' + ('0' + (overtimeMinutesDec * 0.6).toFixed(0)).slice(-2) + ")");
@@ -96,4 +108,4 @@ window.setInterval(function() {
     timeToStayReadable = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
 
     $(dateTableRows).last().find('td:nth-child(5)').html('<div>' + timeToStayReadable + '</div>');
-},  2 * 60 * 1000);
+},  100);
