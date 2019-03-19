@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeiterfassung Interflex Time to stay
 // @namespace    http://tampermonkey.net/
-// @version      0.2.7
+// @version      0.2.8
 // @updateURL    https://raw.githubusercontent.com/stefanheyn/tampermonkey/master/interflex.js
 // @description  try to take over the world!
 // @author       Stefan
@@ -104,11 +104,16 @@ window.setTimeout(function() {
     var hoursMinutes = timeToStay.toFixed(2).toString().split(/[.:]/);
     var hours = parseInt(hoursMinutes[0], 10);
     var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1] * 0.6, 10) : 0;
-    var color = (hours <= 0) ? '#318e25' : '#911717';
-    var sign = (hours <= 0) ? '+' : '-';
+    var color = (isNegative(hours)) ? '#318e25' : '#911717';
+    var sign = (isNegative(hours)) ? '+' : '-';
 
     var timeToStayReadable = hours + ':' + minutes;
     timeToStayReadable = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
 
     $(dateTableRows).last().find('td:nth-child(5)').html('<div style="color:'+ color +'">' + sign +' ' + timeToStayReadable + '</div>');
+
+
+    function isNegative(n) {
+        return ((n = +n) || 1 / n) < 0;
+    }
 },  100);
