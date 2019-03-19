@@ -9,7 +9,7 @@
 // @grant        none
 // ==/UserScript==
 
-window.setTimeout(function() {
+window.setInterval(function() {
     'use strict';
     var $ = window.jQuery;
     const [overtimeHours, overtimeMinutesDec] = $('td.iflxHomeInfoAcc:first').text().trim().split(',');
@@ -96,4 +96,4 @@ window.setTimeout(function() {
     timeToStayReadable = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2);
 
     $(dateTableRows).last().find('td:nth-child(5)').html('<div>' + timeToStayReadable + '</div>');
-}, 100);
+},  2 * 60 * 1000);
