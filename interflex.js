@@ -3,7 +3,7 @@
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       Stefan
 // @match        http://192.168.6.102/WebClient/iflx/home.jsp
 // @grant        none
 // ==/UserScript==
@@ -12,6 +12,7 @@ window.setTimeout(function() {
     'use strict';
     var $ = window.jQuery;
     const worktime = 8;
+    const hallo = 'asdf';
 // Get the current Date
     var weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
     var date = new Date();
