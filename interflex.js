@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeiterfassung Interflex Time to stay
 // @namespace    http://tampermonkey.net/
-// @version      0.2.2
+// @version      0.2.3
 // @updateURL    https://raw.githubusercontent.com/stefanheyn/tampermonkey/master/interflex.js
 // @description  try to take over the world!
 // @author       Stefan
@@ -11,10 +11,11 @@
 
 window.setTimeout(function() {
     'use strict';
+    var $ = window.jQuery;
     const [overtimeHours, overtimeMinutesDec] = $('td.iflxHomeInfoAcc:first').text().trim().split(',');
     $('td.iflxHomeInfoAcc:first')
         .append(" (" + overtimeHours + ':' + ('0' + (overtimeMinutesDec * 0.6).toFixed(0)).slice(-2) + ")");
-    var $ = window.jQuery;
+
     const worktime = 8;
 // Get the current Date
     var weekdays = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
