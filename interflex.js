@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeiterfassung Interflex Time to stay
 // @namespace    http://tampermonkey.net/
-// @version      0.2.5
+// @version      0.2.6
 // @updateURL    https://raw.githubusercontent.com/stefanheyn/tampermonkey/master/interflex.js
 // @description  try to take over the world!
 // @author       Stefan
@@ -19,7 +19,7 @@ window.setTimeout(function() {
     });
 
     window.setInterval(function(){
-        console.log((new Date()).getTime()-lastMove)
+        //console.log((new Date()).getTime()-lastMove)
         if((new Date()).getTime()-lastMove > (60 * 1000)){
             window.location.reload()
         }
