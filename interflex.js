@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Zeiterfassung Interflex Time to stay
 // @namespace    http://tampermonkey.net/
-// @version      0.2.4
+// @version      0.2.5
 // @updateURL    https://raw.githubusercontent.com/stefanheyn/tampermonkey/master/interflex.js
 // @description  try to take over the world!
 // @author       Stefan
@@ -12,10 +12,11 @@
 window.setTimeout(function() {
     'use strict';
     var $ = window.jQuery;
+    $('.iflxHomeScroll').css('height','auto');
     var lastMove = (new Date()).getTime();
     $(document).mousemove(function(e){
         lastMove = e.timeStamp;
-    })
+    });
 
     window.setInterval(function(){
         console.log((new Date()).getTime()-lastMove)
